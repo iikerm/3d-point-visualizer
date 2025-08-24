@@ -1,14 +1,18 @@
-//#pragma once
-#ifndef VECTOR3f_H
-#define VECTOR3f_H
+#pragma once
 #include <math.h>
 
+/*
+Struct designed to hold 3 different floating point values to represent a point
+*/
 typedef struct {
 	float x;
 	float y;
 	float z;
 } Vector3f;
 
+/*
+Returns an instance of Vector3f containing the values received
+*/
 inline Vector3f makeVector3f(float x, float y, float z) {
     Vector3f v;
     v.x = x;
@@ -18,6 +22,9 @@ inline Vector3f makeVector3f(float x, float y, float z) {
     return v;
 }
 
+/*
+Performs the operation a - b, by subtracting each component of b from their corresponding component in a
+*/
 inline Vector3f subtract(const Vector3f* a, const Vector3f* b) {
     return makeVector3f(
         a->x - b->x,
@@ -26,6 +33,9 @@ inline Vector3f subtract(const Vector3f* a, const Vector3f* b) {
     );
 }
 
+/*
+Performs the operation a + b, by adding each component of b to their corresponding component in a
+*/
 inline Vector3f add(const Vector3f* a, const Vector3f* b) {
     return makeVector3f(
         a->x + b->x,
@@ -66,7 +76,7 @@ inline Vector3f createUnitaryVector(const Vector3f* v) {
         return makeVector3f(0, 0, 0);
     }
 
-    float length = sqrt(dotProduct(v, v));          // Calculates vector length
+    float length = (float)sqrt(dotProduct(v, v));          // Calculates vector length
 
     return makeVector3f(
         v->x / length,
@@ -74,5 +84,3 @@ inline Vector3f createUnitaryVector(const Vector3f* v) {
         v->z / length
     );
 }
-
-#endif

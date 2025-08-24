@@ -6,8 +6,8 @@ Definitions
 #define WIN_WIDTH 1000u									// Drawing window width in pixels
 #define WIN_HEIGHT 600u									// Drawing window height in pixels
 
-#define DEFAULT_ORIGIN_X WIN_WIDTH / 2.f
-#define DEFAULT_ORIGIN_Y -(WIN_HEIGHT / 2.f)
+#define DEFAULT_ORIGIN_X WIN_WIDTH / 2.f				// Default X coordinates where the 3D origin will appear in the screen
+#define DEFAULT_ORIGIN_Y -(WIN_HEIGHT / 2.f)			// Default Y coordinates where the 3D origin will appear in the screen
 
 #define POINTS_FNAME "points.pts"						// File from which the points will be read (to avoid having to enter it every time the program is opened)
 
