@@ -13,14 +13,14 @@ Vector3f strToVector3f(const char* str, unsigned long lineNumForDebug) {
     char* tempPtr = strchr(str, ',');
     if (tempPtr == NULL) {
         printf("No first comma (',') found in line %ul\n", lineNumForDebug);
-        exit(NULL);
+        exit(-1);
     }
     comma1 = (tempPtr - str) / sizeof(const char);
 
     tempPtr = strchr(tempPtr+1, ',');
     if (tempPtr == NULL) {
         printf("No second comma (',') found in line %ul\n", lineNumForDebug);
-        exit(NULL);
+        exit(-1);
     }
     comma2 = (tempPtr - str) / sizeof(const char);
 
@@ -30,18 +30,18 @@ Vector3f strToVector3f(const char* str, unsigned long lineNumForDebug) {
 
     strncpy(numBuffer, str, comma1);
     numBuffer[comma1] = '\0';
-    v.x = atof(numBuffer);
+    v.x = (float)atof(numBuffer);
 
     numBuffer[0] = '\0';
     strncpy(numBuffer, str + comma1 + 1, comma2 - comma1);
     numBuffer[comma2] = '\0';
-    v.y = atof(numBuffer);
+    v.y = (float)atof(numBuffer);
 
     numBuffer[0] = '\0';
-    size_t endOfFilePos = str + lineLength;
+    size_t endOfFilePos = (size_t)(str + lineLength);
     strncpy(numBuffer, str + comma2 + 1, lineLength - comma2);
     numBuffer[lineLength] = '\0';
-    v.z = atof(numBuffer);
+    v.z = (float)atof(numBuffer);
 
     return v;
 }
@@ -53,7 +53,7 @@ Vector3f* readPointsFromFile(unsigned long* n, const char* fname) {
 
     if (fpointer == NULL) {
         perror("Unable to read file\n");
-        exit(NULL);
+        exit(-1);
     }
     else {
         // Counting lines in file
@@ -63,7 +63,7 @@ Vector3f* readPointsFromFile(unsigned long* n, const char* fname) {
             size_t elems = fread(lineCountBuffer, 1, 1024, fpointer);
             if (ferror(fpointer)) {
                 perror("Error happened with file\n");
-                exit(NULL);
+                exit(-1);
             }
 
             for (unsigned i = 0; i < elems; i++) {
@@ -83,7 +83,7 @@ Vector3f* readPointsFromFile(unsigned long* n, const char* fname) {
 
         if (v == NULL) {
             perror("Unable to allocate memory for points array\n");
-            exit(NULL);
+            exit(-1);
         }
         else {
             char vectorParseBuffer[50];
