@@ -158,6 +158,8 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
         if (as->geoHandle.rotationAngles.x != 0 || as->geoHandle.rotationAngles.y != 0 || as->geoHandle.rotationAngles.z != 0) {
             SDL_free(as->geoHandle.pointsArray_3d);     // Delete the old array
             as->geoHandle.pointsArray_3d = readPointsFromFile(&as->geoHandle.nPoints, POINTS_FNAME);    // Re-read the points to reset the view
+
+            as->geoHandle.rotationAngles = makeVector3f(0, 0, 0);       // This is because we have also re-set the angles
         }
 
         if (as->geoHandle.zCamValue != DEFAULT_CAM_ZVALUE) {
