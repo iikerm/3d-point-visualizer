@@ -155,13 +155,18 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
     if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_R]) {
         
         // Only reset if there have been any changes since start
-        if (as->geoHandle.rotationAngles.x != 0 && as->geoHandle.rotationAngles.y != 0 && as->geoHandle.rotationAngles.z != 0) {
+        if (as->geoHandle.rotationAngles.x != 0 || as->geoHandle.rotationAngles.y != 0 || as->geoHandle.rotationAngles.z != 0) {
             SDL_free(as->geoHandle.pointsArray_3d);     // Delete the old array
             as->geoHandle.pointsArray_3d = readPointsFromFile(&as->geoHandle.nPoints, POINTS_FNAME);    // Re-read the points to reset the view
         }
 
         if (as->geoHandle.zCamValue != DEFAULT_CAM_ZVALUE) {
             as->geoHandle.zCamValue = DEFAULT_CAM_ZVALUE;
+        }
+
+        if (as->geoHandle.originXY.x != DEFAULT_ORIGIN_X || as->geoHandle.originXY.y != DEFAULT_ORIGIN_Y) {
+            as->geoHandle.originXY.x = DEFAULT_ORIGIN_X;
+            as->geoHandle.originXY.y = DEFAULT_ORIGIN_Y;
         }
     }
 
