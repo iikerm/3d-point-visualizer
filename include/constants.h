@@ -16,7 +16,7 @@ Definitions
 
 #define BG_COLOR 0x10, 0x10, 0x10, SDL_ALPHA_OPAQUE		// Default background color (in RGB format)
 
-#define DEFAULT_CAM_ZVALUE -600.f						// Default Z coordinates of the camera's position
+#define DEFAULT_CAM_ZVALUE 600.f						// Default Z coordinates of the camera's position
 #define FOV_Y_DEG 10.f									// Camera's field of view (in degrees)
 
 #define ANGLE_STEP_DEG 1.f								// Amount (in degrees) that the shape will be rotated in the specified direction for every frame with button press
