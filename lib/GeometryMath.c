@@ -4,7 +4,7 @@
 
 Vector3f getPointsCenter(Vector3f points[], unsigned count) {
     if (count == 0) {
-        printf("Invalid point count to get center: %u", count);
+        printf("Invalid point count to get center: %u\n", count);
         exit(NULL);
     }
 
