@@ -136,16 +136,16 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event* event)
 
     // Manage camera zoom with the mouse wheel
     if (event->type == SDL_EVENT_MOUSE_WHEEL) {
-        // Remember camzvalue is usually -ve
+        // Remember camzvalue will usually be +ve
         if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LSHIFT]) {
-            if (as->geoHandle.zCamValue + event->wheel.y / 2 < 0.0) {
-                as->geoHandle.zCamValue += event->wheel.y / 2;
+            if (as->geoHandle.zCamValue - event->wheel.y / 2 >= 0.0) {
+                as->geoHandle.zCamValue -= event->wheel.y / 2;
                 as->ioHandle.computeTransformations = true;
             }
         }
         else {
-            if (as->geoHandle.zCamValue + event->wheel.y * 5 < 0.0) {
-                as->geoHandle.zCamValue += event->wheel.y * 5;
+            if (as->geoHandle.zCamValue - event->wheel.y * 5 >= 0.0) {
+                as->geoHandle.zCamValue -= event->wheel.y * 5;
                 as->ioHandle.computeTransformations = true;
             }
         }
@@ -300,7 +300,11 @@ SDL_AppResult SDL_AppIterate(void* appstate) {
             char rotationInfoText[50];
             sprintf(rotationInfoText, "ROTATION INFO:   X: %.2f DEG,   Y: %.2f DEG\0", fmod(as->geoHandle.rotationAngles.x, 360), fmod(as->geoHandle.rotationAngles.y, 360));
             SDL_SetRenderDrawColor(as->render, 0xEE, 0xEE, 0xEE, 0xFF);
-            drawText(as->render, 2, 2, rotationInfoText);
+            drawText(as->render, 4, 4, rotationInfoText);
+
+            char camPosInfoText[50];
+            sprintf(camPosInfoText, "CAMERA AT (%.2f, %.2f, %.2f)", cameraPos.x, cameraPos.y, cameraPos.z);
+            drawText(as->render, 4, 16, camPosInfoText);
         }
         else {
             SDL_SetRenderDrawColor(as->render, 0xEE, 0xEE, 0xEE, 0xFF);
