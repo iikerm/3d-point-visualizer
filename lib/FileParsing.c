@@ -77,7 +77,7 @@ Vector3f* readPointsFromFile(unsigned long* n, const char* fname) {
         }
 
         *n = lines;
-        printf("DEBUG: Point amount read from '%s' is %u\n", fname, *n);
+        printf("Successfully read %u points from '%s'\n", *n, fname);
 
         Vector3f* v = (Vector3f*)SDL_calloc(lines, sizeof(Vector3f));
 
