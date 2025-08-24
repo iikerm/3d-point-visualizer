@@ -9,6 +9,7 @@
 typedef struct {
 	bool checkMouse;
 	bool showDebugInfo;
+	bool computeTransformations;
 	SDL_FPoint oldMousePos;
 } InOutHandle;
 
@@ -20,6 +21,7 @@ inline InOutHandle defaultInOutHandle() {
 
 	ioHandle.checkMouse = false;
 	ioHandle.showDebugInfo = false;
+	ioHandle.computeTransformations = false;
 	SDL_GetMouseState(&ioHandle.oldMousePos.x, &ioHandle.oldMousePos.y);
 
 	return ioHandle;
@@ -33,11 +35,12 @@ typedef struct {
 	Vector3f midPoint;
 	SDL_FPoint originXY;
 
-	Vector3f* pointsArray_3d;		// MUST BE INITIALIZED WITH AN ARRAY OF POINTS BEFORE USE
+	Vector3f* pointsArray_3d;		// Array containing points to be drawn (in 3D), MUST BE INITIALIZED WITH AN ARRAY OF POINTS BEFORE USE
+	SDL_FPoint* pointsArray;			// 2D mapping of the 3D array, MUST BE INITIALIZED WITH AN ARRAY OF POINTS BEFORE USE
 } GeometryHandle;
 
 /*
-Returns a GeometryHandle element initialized with the default values. POINTS ARRAY IS NOT INITIALIZED.
+Returns a GeometryHandle element initialized with the default values. NONE OF THE POINT ARRAYS ARE INITIALIZED.
 */
 inline GeometryHandle defaultGeometryHandle() {
 	SDL_FPoint defaultOrigin;
